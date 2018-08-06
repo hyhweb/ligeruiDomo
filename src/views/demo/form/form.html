@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link href="../../../source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css">
+    <script src="../../../source/lib/jquery/jquery-1.9.0.min.js" type="text/javascript"></script>
+    <script src="../../../source/lib/ligerUI/js/ligerui.all.1.3.3.js" type="text/javascript"></script>
+    <script src="../../../source/lib/jquery.cookie.js" type="text/javascript"></script>
+    <script src="../../../source/lib/json2.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="form2"></div>
+</body>
+<script type="text/javascript">
+    var groupicon = "../../../../lib/ligerUI/skins/icons/communication.gif";
+    var CustomersData = {Rows: [{CustomerID: '111'}, {CustomerID: '111'}, {CustomerID: '111'}]}
+    $(function () {
+        //创建表单结构
+        var form = $("#form2").ligerForm({
+            inputWidth: 170, labelWidth: 90, space: 40,
+            fields: [
+                /* {name: "ProductID", type: "hidden"},*/
+                {display: "产品名称", name: "ProductName", newline: false, type: "text", group: "基础信息"},
+                {
+                    display: "类别 ", name: "CategoryID", newline: false,
+                    type: "combobox",
+                    editor: {
+
+                        textField: 'text',
+                        valueField: 'CategoryID',
+                        isMultiSelect: true,
+                        autocomplete: true,
+                        keySupport: true,
+                        data: [{CategoryID: '1', text: '1111'}, {CategoryID: '2', text: '2222'}, {CategoryID: '3', text: '333'}]
+                    }
+                },
+                {
+                    display: "类别A ", name: "Category", newline: false,
+                    type: "combobox",
+                    editor: {
+
+                        textField: 'text',
+                        valueField: 'CategoryID',
+                        //isMultiSelect: true,
+                        autocomplete: true,
+                        keySupport: true,
+                        data: [{CategoryID: '1', text: '1111'}, {CategoryID: '2', text: '2222'}, {CategoryID: '3', text: '333'}]
+                    }
+                },
+                {
+                    display: "性别", name: "sex", newline: false,
+                    type: "radiolist",
+                    editor: {
+
+                        name: "sex",
+                        type: "radiolist",
+                        textField: 'text',
+                        valueField: 'CategoryID',
+
+                        data: [{CategoryID: '1', text: '1111'}, {CategoryID: '2', text: '2222'}]
+                    }
+                },
+                {
+                    display: "checkbox", name: "checkbox", newline: false,
+                    type: "checkboxlist",
+                    editor: {
+                        type: "checkboxlist",
+                        textField: 'text',
+                        valueField: 'CategoryID',
+
+                        data: [{CategoryID: '1', text: '1111'}, {CategoryID: '2', text: '2222'}]
+                    }
+                },
+                {display: "日期 ", name: "AddTime", newline: false, type: "date", showTime: true},
+                {display: "折扣", name: "QuantityPerUnit", newline: false, type: "number"},
+                {display: "折扣", name: "QuantityPerUnit", newline: false, type: "button"},
+
+                {display: "单价", name: "UnitPrice", newline: false, type: "number"},
+                {display: "库存量", name: "UnitsInStock", newline: false, type: "digits", group: "库存"},
+                {display: "订购量", name: "UnitsOnOrder", newline: false, type: "digits"},
+                {display: "备注", name: "Remark", newline: false, type: "textarea", width: 470}
+            ],
+            buttons: [
+                {text: '保存', width: 60, click: f_save},
+                {text: '关闭', width: 60, click: f_close}
+            ]
+        });
+
+        function f_save() {
+            var form = liger.get("form1");
+
+            var data = form.getData();
+
+            console.log(data);
+        }
+
+        function f_close() {
+            alert('关闭');
+        }
+
+        $("#form1").ligerForm();
+        setTimeout(function () {
+            form.setData({
+                ProductName: '222',
+                CategoryID: '1,2',
+                Category: '1',
+                checkbox: '1',
+                sex: '1',
+                AddTime: '2018-10-2'
+            })
+            console.log(form.getData())
+        }, 1000)
+
+    });
+</script>
+
+
+</html>

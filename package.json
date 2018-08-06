@@ -1,0 +1,21 @@
+{
+  "name": "ligerui",
+  "version": "1.0.0",
+  "description": "ligerui",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp --gulpfile gulpfile.js default",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ligerui"
+  ],
+  "author": "hyhong",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^3.0.1",
+    "gulp-webserver": "^0.9.1"
+  }
+}
