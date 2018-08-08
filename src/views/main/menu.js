@@ -8,8 +8,11 @@ var indexdata =
                  },
                 {
                     text: 'grid', url: "../demo/grid/grid.html"
+                },
+                {
+                    text: 'formgrid', url: "../demo/formgrid/formgrid.html"
                 }
             ]
-        },
-        {text: '试题管理', url: "../examAdmin/index.html"}
+        }
+       /* {text: '试题管理', url: "../examAdmin/index.html"}*/
     ]

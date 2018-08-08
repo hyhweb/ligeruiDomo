@@ -23,6 +23,7 @@
 
     $.ligerDefaults.Grid = {
         title: null,
+        searchForm:null,
         width: 'auto',                          //宽度值
         height: 'auto',                          //宽度值
         columnWidth: null,                      //默认列宽度
@@ -471,6 +472,12 @@
             g.gridheader = $(".l-grid-header:first", g.gridview2);
             //表主体     
             g.gridbody = $(".l-grid-body:first", g.gridview2);
+            if(p.searchForm != null){
+                var searchFormBox = $('<div class="l-panel-search-box"></div>');
+                searchFormBox.append(p.searchForm)
+                g.header.after(searchFormBox);
+            }
+
             //处理autoFilter
             if (p.autoFilter)
             {

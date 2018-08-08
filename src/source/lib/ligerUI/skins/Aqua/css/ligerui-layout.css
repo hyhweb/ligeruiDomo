@@ -71,7 +71,14 @@
 .l-accordion-header{ position:relative;padding-left:10px; color:#183152; font-weight:bold;height:25px; line-height:24px;  background:#E5EFFE url('../images/layout/accordion-header.gif') repeat-x; overflow:hidden; cursor:pointer;}
 .l-accordion-header-over{background:#EFF4FE url('../images/layout/accordion-header-over.gif') repeat-x;} 
 .l-accordion-content{position:relative;overflow:auto; background:white url('../images/layout/accordion-content.gif') repeat-x;}
-
+.l-accordion-content .accordion-inner li{
+    padding:0px 10px 0 10px;
+    line-height: 26px;
+    cursor: pointer;
+}
+.l-accordion-content .accordion-inner li:hover{
+    background: #E0ECFF;
+}
 .l-layout-left .l-accordion-panel{ border-left:none; border-right:none;  }
 .l-accordion-header i {
     display: none;

@@ -1265,6 +1265,10 @@
         "password": {
             control: 'TextBox',
             password: true
+        },
+        "button":{
+            control: 'Button',
+            body: $('<div></div>')
         }
     };
     liger.editors["string"] = liger.editors["text"];
@@ -1273,7 +1277,7 @@
     liger.editors["float"] = liger.editors["number"];
     liger.editors["chk"] = liger.editors["checkbox"];
     liger.editors["popupedit"] = liger.editors["popup"];
-
+    liger.editors["button"] = liger.editors["button"];
     //jQuery version fix
     $.fn.live = $.fn.on ? $.fn.on : $.fn.live;
     if (!$.browser)
@@ -1592,7 +1596,10 @@
     };
 
     $.ligerDefaults.Accordion = {
+        data:null,
+        tab:null,
         height: null,
+        onMenuSelect:null,
         speed: "normal",
         changeHeightOnResize: false,
         heightDiff: 0 // 高度补差  
@@ -1622,6 +1629,39 @@
             g.accordion = $(g.element);
             if (!g.accordion.hasClass("l-accordion-panel")) g.accordion.addClass("l-accordion-panel");
             var selectedIndex = 0;
+            var addItem = function (item) {
+                var itemHtml = $('<div title="'+item.text+'" class="l-accordion-content" ></div>');
+                if(item.icon){
+                    itemHtml.attr("data-icon",item.icon)
+                }
+                var itemBox = $('<ul class="accordion-inner"></ul>');
+                console.log(itemBox,'itemBox');
+
+                if(item.children){
+                    var itemInnerHtml = $.map(item.children,function (value,key) {
+                       var itemInner = $('<li>'+value.text+'</li>');
+                        itemInner.off().on('click',function () {
+                            if(p.onMenuSelect !=null){
+                                var node = value;
+                                node.target = itemInner;
+                                p.onMenuSelect(node);
+                            }
+                        })
+
+                        return itemInner;
+                    })
+                    itemBox.html(itemInnerHtml);
+                    itemHtml.html(itemBox);
+                }
+                return itemHtml;
+            }
+            if(p.data != null){
+                var accordionInner = $.map(p.data,function (item,index) {
+                     var itemHtml =  addItem(item);
+                     return itemHtml;
+                 });
+                g.accordion.html(accordionInner);
+            }
             if ($("> div[lselected=true]", g.accordion).length > 0)
                 selectedIndex = $("> div", g.accordion).index($("> div[lselected=true]", g.accordion));
 
@@ -1637,7 +1677,6 @@
                 }
                 $(box).before(header);
                 if (!$(box).hasClass("l-accordion-content")) $(box).addClass("l-accordion-content");
-
                 if ($(box).attr("data-icon"))
                 {
                     header.addClass("l-accordion-header-hasicon");
@@ -1818,6 +1857,9 @@
             g.button = $(g.element);
             g.button.addClass("l-button");
             g.button.append('<div class="l-button-l"></div><div class="l-button-r"></div><span></span>');
+            if(p.width){
+                g.button.width(p.width)
+            }
             g.button.hover(function () {
                 if (p.disabled) return;
                 g.button.addClass("l-button-over");
@@ -3111,7 +3153,6 @@
                 $("tr[value='" + value + "'] td", g.selectBox).addClass("l-selected");
                 $("tr[value!='" + value + "'] td", g.selectBox).removeClass("l-selected");
             } else if(p.data){
-                debugger
                 g._changeValue(value, text, isTriggerEvent);
                 if (value != null)
                 {
@@ -5522,7 +5563,7 @@
         opener: null,
         timeParmName: null,  //是否给URL后面加上值为new Date().getTime()的参数，如果需要指定一个参数名即可
         closeWhenEnter: null, //回车时是否关闭dialog
-        isHidden: true,        //关闭对话框时是否只是隐藏，还是销毁对话框
+        isHidden: false,        //关闭对话框时是否只是隐藏，还是销毁对话框
         show: true,          //初始化时是否马上显示
         title: '提示',        //头部 
         showMax: false,                             //是否显示最大化按钮 
@@ -5578,6 +5619,9 @@
             var tmpId = "";
             g.set(p, true);
             var dialog = $('<div class="l-dialog"><table class="l-dialog-table" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td class="l-dialog-tl"></td><td class="l-dialog-tc"><div class="l-dialog-tc-inner"><div class="l-dialog-icon"></div><div class="l-dialog-title"></div><div class="l-dialog-winbtns"><div class="l-dialog-winbtn l-dialog-close"></div></div></div></td><td class="l-dialog-tr"></td></tr><tr><td class="l-dialog-cl"></td><td class="l-dialog-cc"><div class="l-dialog-body"><div class="l-dialog-image"></div> <div class="l-dialog-content"></div><div class="l-dialog-buttons"><div class="l-dialog-buttons-inner"></div></td><td class="l-dialog-cr"></td></tr><tr><td class="l-dialog-bl"></td><td class="l-dialog-bc"></td><td class="l-dialog-br"></td></tr></tbody></table></div>');
+            if(p.data != null){
+                dialog.data(p.data);
+            }
             $('body').append(dialog);
             g.dialog = dialog;
             if (p.layoutMode == 2) //上中下布局，不再需要这左右的单元格了
@@ -8500,7 +8544,7 @@
                         {
                             out.push(' ' + field.attrRender());
                         }
-                        out.push('><ul>');
+                        out.push('><ul class="clearfix">');
                         //append field 编辑后面自定义内容
                         if (field.beforeContent) //前置内容
                         {
@@ -8984,8 +9028,8 @@
             try
             {
                 var editor = editorBuilder.create.call(this, container, editParm, p);
-                if (editor && editorBuilder.resize)
-                    editorBuilder.resize.call(this, editor, width, height, editParm); 
+                if (editor && editorBuilder.resize && editor.type !="Button")
+                    editorBuilder.resize.call(this, editor, width, height, editParm);
                 return editor;
             } catch (e)
             {
@@ -9236,6 +9280,7 @@
 
     $.ligerDefaults.Grid = {
         title: null,
+        searchForm:null,
         width: 'auto',                          //宽度值
         height: 'auto',                          //宽度值
         columnWidth: null,                      //默认列宽度
@@ -9684,6 +9729,12 @@
             g.gridheader = $(".l-grid-header:first", g.gridview2);
             //表主体     
             g.gridbody = $(".l-grid-body:first", g.gridview2);
+            if(p.searchForm != null){
+                var searchFormBox = $('<div class="l-panel-search-box"></div>');
+                searchFormBox.append(p.searchForm)
+                g.header.after(searchFormBox);
+            }
+
             //处理autoFilter
             if (p.autoFilter)
             {

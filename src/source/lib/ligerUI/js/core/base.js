@@ -1265,6 +1265,10 @@
         "password": {
             control: 'TextBox',
             password: true
+        },
+        "button":{
+            control: 'Button',
+            body: $('<div></div>')
         }
     };
     liger.editors["string"] = liger.editors["text"];
@@ -1273,7 +1277,7 @@
     liger.editors["float"] = liger.editors["number"];
     liger.editors["chk"] = liger.editors["checkbox"];
     liger.editors["popupedit"] = liger.editors["popup"];
-
+    liger.editors["button"] = liger.editors["button"];
     //jQuery version fix
     $.fn.live = $.fn.on ? $.fn.on : $.fn.live;
     if (!$.browser)

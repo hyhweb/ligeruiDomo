@@ -1,0 +1,44 @@
+[
+  {
+    "text": "demo", "url": "../examAdmin/index.html",
+    "children": [
+      {
+        "text": "form", "url": "../demo/form/form.html"
+      },
+      {
+        "text": "grid", "url": "../demo/grid/grid.html"
+      },
+      {
+        "text": "formgrid", "url": "../demo/formgrid/formgrid.html"
+      }
+    ]
+  },
+  {
+    "text": "客户管理",
+    "children": [
+      {
+        "text": "form", "url": "../demo/form/form.html"
+      },
+      {
+        "text": "我的客户", "url": "../demo/grid/grid.html"
+      },
+      {
+        "text": "formgrid", "url": "../demo/formgrid/formgrid.html"
+      }
+    ]
+  },
+  {
+    "text": "客户查询",
+    "children": [
+      {
+        "text": "form", "url": "../demo/form/form.html"
+      },
+      {
+        "text": "业务单查询", "url": "../demo/grid/grid.html"
+      },
+      {
+        "text": "保险查询", "url": "../demo/formgrid/formgrid.html"
+      }
+    ]
+  }
+]

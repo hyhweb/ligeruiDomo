@@ -698,7 +698,7 @@
                         {
                             out.push(' ' + field.attrRender());
                         }
-                        out.push('><ul>');
+                        out.push('><ul class="clearfix">');
                         //append field 编辑后面自定义内容
                         if (field.beforeContent) //前置内容
                         {
@@ -1182,8 +1182,8 @@
             try
             {
                 var editor = editorBuilder.create.call(this, container, editParm, p);
-                if (editor && editorBuilder.resize)
-                    editorBuilder.resize.call(this, editor, width, height, editParm); 
+                if (editor && editorBuilder.resize && editor.type !="Button")
+                    editorBuilder.resize.call(this, editor, width, height, editParm);
                 return editor;
             } catch (e)
             {

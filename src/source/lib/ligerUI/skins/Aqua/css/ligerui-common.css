@@ -13,6 +13,13 @@ body{font-family: "微软雅黑", "宋体", Arial, sans-serif; font-size: 12px; 
     background:url('../images/common/loading.gif') no-repeat 0px 0px;width:24px; height:24px; 
      display:none;
 }
+.clearfix:after {
+	content: "." ;
+	display: block ;
+	height: 0 ;
+	clear: both ;
+	visibility: hidden ;
+}
 /* -------------
    * 滚动条颜色 *
 * ------------- */ 

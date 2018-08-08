@@ -1,0 +1,103 @@
+[
+  {
+    "text":"客户管理",
+    "children":[
+      {
+        "text": "客户管理",
+        "children": [
+          {
+            "text": "我的客户", "url": "../demo/form/form.html"
+          },
+          {
+            "text": "grid", "url": "../demo/grid/grid.html"
+          },
+          {
+            "text": "formgrid","url" : "../demo/formgrid/formgrid.html"
+          }
+        ]
+      },
+      {
+        "text": "客户查询",
+        "children": [
+          {
+            "text": "业务单查询", "url": "../demo/form/form.html"
+          },
+          {
+            "text": "保险查询", "url": "../demo/grid/grid.html"
+          },
+          {
+            "text": "formgrid","url" : "../demo/formgrid/formgrid.html"
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "text":"工作单管理",
+    "children":[
+      {
+        "text": "我的业务",
+        "children": [
+          {
+            "text": "出口业务", "url": "../demo/form/form.html"
+          },
+          {
+            "text": "海铁业务", "url": "../demo/grid/grid.html"
+          },
+          {
+            "text": "formgrid","url" : "../demo/formgrid/formgrid.html"
+          }
+        ]
+      },
+      {
+        "text": "船期跟踪",
+        "children": [
+          {
+            "text": "船期信息维护", "url": "../demo/form/form.html"
+          },
+          {
+            "text": "船期跟踪", "url": "../demo/grid/grid.html"
+          },
+          {
+            "text": "发送日志查询","url" : "../demo/formgrid/formgrid.html"
+          }
+        ]
+      }
+    ]
+  },
+  {
+  "text":"财务管理",
+    "children": []
+  },
+  {
+    "text":"车队管理",
+    "children": []
+  },
+  {
+    "text":"驳船管理",
+    "children": []
+  },
+  {
+    "text":"报表管理",
+    "children": []
+  },
+  {
+    "text":"行政人事",
+    "children": []
+  },
+  {
+    "text":"系统管理",
+    "children": []
+  },
+  {
+    "text":"授权码"
+  },
+  {
+    "text":"修改密码"
+  },
+  {
+    "text":"退出"
+  }
+
+]

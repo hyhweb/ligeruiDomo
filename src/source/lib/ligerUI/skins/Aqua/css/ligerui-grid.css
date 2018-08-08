@@ -52,6 +52,10 @@ background: url('../images/panel/header-bg.gif') repeat-x left -1px; position:re
 }
 .l-panel-topbar {
 	padding:0;
+    background: #E5EFFE url(../images/layout/panel-header2.gif) repeat-x;
+    height: 31px;
+    line-height: 31px;
+    border-bottom: 1px solid #D6D6D6;
 }
 .l-panel-topbarinner {
 	float:right;
@@ -84,7 +88,7 @@ background: url('../images/panel/header-bg.gif') repeat-x left -1px; position:re
 	overflow:hidden;
 }
 .l-grid-hashorizontal .l-grid-body1 .l-jplace {
-	height:19px;
+	/*height:19px;*/
 } 
 .l-grid td div
 {
@@ -550,6 +554,10 @@ background: url(../images/icon/icon-loading.gif) no-repeat; background-position:
 /*
     搜索栏
 */
+.l-panel-search-box{
+    background: #E5EFFE url(../images/layout/panel-header2.gif) repeat-x;
+}
+
 .l-panel-search
 {height:28px; padding-top:3px; padding-left:3px; 
  border-left:1px solid #99BBE8; border-right:1px solid #99BBE8;

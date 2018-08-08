@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,12 +14,12 @@
     <script src="../../../source/scripts/api.js" type="text/javascript"></script>
 </head>
 <body>
-<div id="form"></div>
+<form id="form"></form>
+<div id="grid"></div>
 </body>
 <script type="text/javascript">
-    var groupicon = "../../../../lib/ligerUI/skins/icons/communication.gif";
-    var CustomersData = {Rows: [{CustomerID: '111'}, {CustomerID: '111'}, {CustomerID: '111'}]}
     $(function () {
+        var grid;
         //获取下拉数据
         $.when(requestList.getType()).then(function (type) {
             var selectDataSource = {
@@ -30,10 +30,12 @@
         //创建表单
         var creatForm = function (listData) {
             var formParam = {
-                inputWidth: 170, labelWidth: 90, space: 40,
+                inputWidth: 100, labelWidth: 70, space: 10,
                 fields: [
                     /* {name: "ProductID", type: "hidden"},*/
-                    {display: "产品名称", name: "ProductName", newline: false, type: "text", group: "基础信息"},
+                    {display: "产品名称", name: "ProductName", newline: false, type: "text"
+                       /* , group: "基础信息"*/
+                    },
                     {
                         display: "类别 ", name: "CategoryID", newline: false,
                         type: "combobox",
@@ -101,17 +103,20 @@
                     },
                     {display: "日期 ", name: "AddTime", newline: false, type: "date", showTime: true},
                     {display: "折扣", name: "QuantityPerUnit", newline: false, type: "number"},
-                    {display: "折扣", name: "QuantityPerUnit", newline: false, type: "button"},
+                    {display: "", name: "button", newline: false, type: "button",width:'100',
+                        editor: {
+                            text:"查询"
+                        }},
 
-                    {display: "单价", name: "UnitPrice", newline: false, type: "number"},
-                    {display: "库存量", name: "UnitsInStock", newline: false, type: "digits", group: "库存"},
+                    /*{display: "单价", name: "UnitPrice", newline: false, type: "number"},*/
+/*                    {display: "库存量", name: "UnitsInStock", newline: false, type: "digits", group: "库存"},
                     {display: "订购量", name: "UnitsOnOrder", newline: false, type: "digits"},
-                    {display: "备注", name: "Remark", newline: false, type: "textarea", width: 470}
+                    {display: "备注", name: "Remark", newline: false, type: "textarea", width: 470}*/
                 ],
-                buttons: [
-                    {text: '保存', width: 60, click: f_save},
-                    {text: '关闭', width: 60, click: f_close}
-                ]
+               /* buttons: [
+                    {text: '查询', width: 60, click: f_save},
+                    {text: '重置', width: 60, click: f_close}
+                ]*/
             }
             var form = $("#form").ligerForm(formParam);
 
@@ -121,13 +126,16 @@
                 var data = form.getData();
 
                 console.log(data);
+                grid.loadServerData(data);
+
             }
 
             function f_close() {
                 alert('关闭');
+                $("#form")[0].reset();
             }
 
-            $("#form1").ligerForm();
+            $("#form").ligerForm();
             // setTimeout(function () {
             form.setData({
                 ProductName: '222',
@@ -141,12 +149,95 @@
             console.log(form.getData())
             //  }, 1000)
 
+         var grid =   createGrid(form)
+
+
         }
 
 
+        var parentDialog = null;
+        var editDialog = function (rows) {
+            /*var rows = grid.getSelectedRows();
+            console.log(rows);*/
+            parentDialog=   $.ligerDialog.open(
+                {
+                    height:400,
+                    width: 600,
+                    title : '提示',
+                    url: './edit.html',
+                    load:true,
+                    showMax: false,
+                    showToggle: true,
+                    showMin: false,
+                    isResize: true,
+                    slide: false,
+                    data: {
+                        name: 'hong'
+                    },
+                    buttons: [{ text: '确定', onclick: function(item, dialog){alert('确定');dialog.close();} }, { text: '取消', onclick: function(item, dialog){dialog.close();}}]
+                }
+            );
+        };
+        var createGrid = function (form) {
+            var gridParam = {
+                title:'客户列表',
+                searchForm:$("#form"),
+                columns: [
+                    {display: '主键', name: 'CustomerID', align: 'left', width: 120},
+                    {display: '公司名', name: 'CompanyName', minWidth: 60},
+                    {display: '联系名', name: 'ContactName', width: 50, align: 'left'},
+                    {display: '城市', name: 'City'}
+                ], pageSize: 20,
+                onDblClickRow : function (data, rowindex, rowobj)
+                {
+                    //$.ligerDialog.alert('选择的是' + data.ContactName);
+                    editDialog(data);
+                },
+                groupColumnName:'CompanyName',
+                groupColumnDisplay:'',
+                url: '../../data/grid.json',
+                root: 'data',
+                record: 'count',
+                method: "get",
+                parms: form.getData(),
+                checkbox: true,
+                //isSingleCheck:true,
+                rownumbers: true,
+                // height: '100%',
+                /* groupColumnName: 'City',
+                 groupColumnDisplay: '城市',*/
+                toolbar: {
+                    items: [
+                        {
+                            text: '增加', click: function (item) {
+                            var rows = grid.getSelectedRows();
+                            console.log(item, 'item', rows);
+                            $.ligerDialog.success('提示内容');
+                        }, icon: 'add'
+                        },
+                        {line: true},
+                        {
+                            text: '修改', click: function (item) {
+                            var rows = grid.getSelectedRows();
+                            editDialog(rows);
+                        }, icon: 'edit'
+                        },
+                        {line: true},
+                        {
+                            text: '删除', click: function (item) {
+                            var rows = grid.getSelectedRows();
+                            console.log(item, 'item', rows);
+                            $.ligerDialog.success('loading');
+                            $.ligerMessageBox.success('success');
+                        }, icon: 'delete'
+                        }
+                    ]
+                }
+            }
+             grid = $("#grid").ligerGrid(gridParam);
+            return grid;
+        }
 
-    });
+    })
 </script>
-
-
 </html>

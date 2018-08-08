@@ -69,7 +69,7 @@
         opener: null,
         timeParmName: null,  //是否给URL后面加上值为new Date().getTime()的参数，如果需要指定一个参数名即可
         closeWhenEnter: null, //回车时是否关闭dialog
-        isHidden: true,        //关闭对话框时是否只是隐藏，还是销毁对话框
+        isHidden: false,        //关闭对话框时是否只是隐藏，还是销毁对话框
         show: true,          //初始化时是否马上显示
         title: '提示',        //头部 
         showMax: false,                             //是否显示最大化按钮 
@@ -125,6 +125,9 @@
             var tmpId = "";
             g.set(p, true);
             var dialog = $('<div class="l-dialog"><table class="l-dialog-table" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td class="l-dialog-tl"></td><td class="l-dialog-tc"><div class="l-dialog-tc-inner"><div class="l-dialog-icon"></div><div class="l-dialog-title"></div><div class="l-dialog-winbtns"><div class="l-dialog-winbtn l-dialog-close"></div></div></div></td><td class="l-dialog-tr"></td></tr><tr><td class="l-dialog-cl"></td><td class="l-dialog-cc"><div class="l-dialog-body"><div class="l-dialog-image"></div> <div class="l-dialog-content"></div><div class="l-dialog-buttons"><div class="l-dialog-buttons-inner"></div></td><td class="l-dialog-cr"></td></tr><tr><td class="l-dialog-bl"></td><td class="l-dialog-bc"></td><td class="l-dialog-br"></td></tr></tbody></table></div>');
+            if(p.data != null){
+                dialog.data(p.data);
+            }
             $('body').append(dialog);
             g.dialog = dialog;
             if (p.layoutMode == 2) //上中下布局，不再需要这左右的单元格了

@@ -709,7 +709,6 @@
                 $("tr[value='" + value + "'] td", g.selectBox).addClass("l-selected");
                 $("tr[value!='" + value + "'] td", g.selectBox).removeClass("l-selected");
             } else if(p.data){
-                debugger
                 g._changeValue(value, text, isTriggerEvent);
                 if (value != null)
                 {

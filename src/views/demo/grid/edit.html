@@ -20,6 +20,7 @@
     var groupicon = "../../../../lib/ligerUI/skins/icons/communication.gif";
     var CustomersData = {Rows: [{CustomerID: '111'}, {CustomerID: '111'}, {CustomerID: '111'}]}
     $(function () {
+        console.log($("#edit").data(),'$("#edit").data()')
         //创建表单结构
         var form = $("#form1").ligerForm({
             inputWidth: 170, labelWidth: 90, space: 40,
@@ -87,16 +88,16 @@
         }
 
         $("#form1").ligerForm();
-        setTimeout(function () {
+       // setTimeout(function () {
             form.setData({
                 ProductName: '222',
-                CategoryID: '1;2',
+                CategoryID: '1,2',
                 checkbox:'1',
                 sex: '1',
                 AddTime: '2018-10-2'
             })
             console.log(form.getData())
-        }, 1000)
+      //  }, 1000)
 
     });
 </script>

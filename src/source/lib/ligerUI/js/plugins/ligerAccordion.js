@@ -19,7 +19,10 @@
     };
 
     $.ligerDefaults.Accordion = {
+        data:null,
+        tab:null,
         height: null,
+        onMenuSelect:null,
         speed: "normal",
         changeHeightOnResize: false,
         heightDiff: 0 // 高度补差  
@@ -49,6 +52,39 @@
             g.accordion = $(g.element);
             if (!g.accordion.hasClass("l-accordion-panel")) g.accordion.addClass("l-accordion-panel");
             var selectedIndex = 0;
+            var addItem = function (item) {
+                var itemHtml = $('<div title="'+item.text+'" class="l-accordion-content" ></div>');
+                if(item.icon){
+                    itemHtml.attr("data-icon",item.icon)
+                }
+                var itemBox = $('<ul class="accordion-inner"></ul>');
+                console.log(itemBox,'itemBox');
+
+                if(item.children){
+                    var itemInnerHtml = $.map(item.children,function (value,key) {
+                       var itemInner = $('<li>'+value.text+'</li>');
+                        itemInner.off().on('click',function () {
+                            if(p.onMenuSelect !=null){
+                                var node = value;
+                                node.target = itemInner;
+                                p.onMenuSelect(node);
+                            }
+                        })
+
+                        return itemInner;
+                    })
+                    itemBox.html(itemInnerHtml);
+                    itemHtml.html(itemBox);
+                }
+                return itemHtml;
+            }
+            if(p.data != null){
+                var accordionInner = $.map(p.data,function (item,index) {
+                     var itemHtml =  addItem(item);
+                     return itemHtml;
+                 });
+                g.accordion.html(accordionInner);
+            }
             if ($("> div[lselected=true]", g.accordion).length > 0)
                 selectedIndex = $("> div", g.accordion).index($("> div[lselected=true]", g.accordion));
 
@@ -64,7 +100,6 @@
                 }
                 $(box).before(header);
                 if (!$(box).hasClass("l-accordion-content")) $(box).addClass("l-accordion-content");
-
                 if ($(box).attr("data-icon"))
                 {
                     header.addClass("l-accordion-header-hasicon");

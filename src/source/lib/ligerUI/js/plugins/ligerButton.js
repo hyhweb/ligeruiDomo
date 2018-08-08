@@ -51,6 +51,9 @@
             g.button = $(g.element);
             g.button.addClass("l-button");
             g.button.append('<div class="l-button-l"></div><div class="l-button-r"></div><span></span>');
+            if(p.width){
+                g.button.width(p.width)
+            }
             g.button.hover(function () {
                 if (p.disabled) return;
                 g.button.addClass("l-button-over");
