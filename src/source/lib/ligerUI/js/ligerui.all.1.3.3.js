@@ -2104,7 +2104,7 @@
         textField: 'text',      //显示成员 
         valueFieldID:null,      //隐藏域
         name : null,            //表单名
-        split: ";",             //分隔符
+        split: ",",             //分隔符
         data: null,             //数据  
         parms: null,            //ajax提交表单 
         url: null,              //数据源URL(需返回JSON)
@@ -2131,17 +2131,23 @@
         {
             return 'CheckBoxList';
         },
+        __idPrev: function ()
+        {
+            return 'CheckBoxList';
+        },
         _extendMethods: function ()
         {
             return $.ligerMethos.CheckBoxList;
         },
         _init: function ()
         {
+
             $.ligerui.controls.CheckBoxList.base._init.call(this); 
         },
         _render: function ()
         {
-            var g = this, p = this.options; 
+            var g = this, p = this.options;
+            console.log(g,'g');
             g.data = p.data;    
             g.valueField = null; //隐藏域(保存值) 
 
@@ -2153,16 +2159,16 @@
                     g.valueField.hide();
                 }
             }
-            else if (p.valueFieldID)
+            /*else if (p.valueFieldID)
             {
                 g.valueField = $("#" + p.valueFieldID + ":input,[name=" + p.valueFieldID + "]:input");
                 if (g.valueField.length == 0) g.valueField = $('<input type="hidden"/>');
                 g.valueField[0].id = g.valueField[0].name = p.valueFieldID;
-            }
+            }*/
             else
             {
                 g.valueField = $('<input type="hidden"/>');
-                g.valueField[0].id = g.valueField[0].name = g.id + "_val";
+                g.valueField[0].id = g.valueField[0].name = g.id;
             }
             if (g.valueField[0].name == null) g.valueField[0].name = g.valueField[0].id;
             if (p.valueFieldCssClass)
@@ -2364,7 +2370,7 @@
             var out = [], rowSize = p.rowSize, appendRowStart = false, name = p.name || g.id;
             for (var i = 0; i < data.length; i++)
             {
-                var val = data[i][p.valueField], txt = data[i][p.textField], id = g.id + "-" + i;
+                var val = data[i][p.valueField], txt = data[i][p.textField], id = new Date().getTime()+"-"+i+"+"+g.id ;
                 var newRow = i % rowSize == 0;
                 //0,5,10
                 if (newRow)
@@ -2382,7 +2388,7 @@
         { 
             var g = this, p = this.options, name = p.name || g.id;
             var values = [];
-            $('input:checkbox[name="' + name + '"]:checked').each(function ()
+            $('input:checkbox[name="' + name + '"]:checked',g.checkboxList).each(function ()
             {
                 values.push(this.value);
             });
@@ -2399,7 +2405,7 @@
         {
             var g = this, p = this.options, name = p.name || g.id;
             var values = [];
-            $('input:checkbox[name="' + name + '"]:checked').each(function ()
+            $('input:checkbox[name="' + name + '"]:checked',g.checkboxList).each(function ()
             {
                 values.push($(this).next("label").text());
             });
@@ -5674,6 +5680,7 @@
             }
             else if (p.url)
             {
+
                 var url = $.isFunction(p.url) ? p.url.call(g) : p.url;
                 var urlParms = $.isFunction(p.urlParms) ? p.urlParms.call(g) : p.urlParms;
                 if (p.timeParmName)
@@ -8036,6 +8043,7 @@
     //param {jinput} 表单元素jQuery对象 比如input、select、textarea 
     $.ligerDefaults.Form.editorBulider = function (jinput)
     {
+
         //这里this就是form的ligerui对象
         var g = this, p = this.options;
         if (!jinput || !jinput.length) return;
@@ -8234,6 +8242,7 @@
             var g = this, p = this.options;
             var jform = $(this.element);
             g.form = jform.is("form") ? jform : jform.parents("form:first");
+
             //生成ligerui表单样式
             $("input,select,textarea", jform).each(function ()
             {
@@ -8599,7 +8608,7 @@
             }
         },
         _createEditors : function(e)
-        { 
+        {
             var g = this, p = this.options;
             var fields = e.fields,
                 idPrev = e.idPrev || g.id,
@@ -9024,6 +9033,7 @@
         },
         _createEditor: function (editorBuilder, container, editParm, width, height)
         {
+
             var g = this, p = this.options;
             try
             {
@@ -18155,6 +18165,10 @@
         {
             return 'RadioList';
         },
+        __idPrev: function ()
+        {
+            return 'RadioList';
+        },
         _extendMethods: function ()
         {
             return $.ligerMethos.RadioList;
@@ -18167,8 +18181,8 @@
         {
             var g = this, p = this.options;
             g.data = p.data;
-            g.valueField = null; //隐藏域(保存值) 
-
+            g.valueField = null; //隐藏域(保存值)
+            debugger;
             if ($(this.element).is(":hidden") || $(this.element).is(":text"))
             {
                 g.valueField = $(this.element);
@@ -18177,16 +18191,17 @@
                     g.valueField.hide();
                 }
             }
-            else if (p.valueFieldID)
+            /*else if (p.valueFieldID)
             {
+
                 g.valueField = $("#" + p.valueFieldID + ":input,[name=" + p.valueFieldID + "]:input");
                 if (g.valueField.length == 0) g.valueField = $('<input type="hidden"/>');
                 g.valueField[0].id = g.valueField[0].name = p.valueFieldID;
-            }
+            }*/
             else
             {
                 g.valueField = $('<input type="hidden"/>');
-                g.valueField[0].id = g.valueField[0].name = g.id + "_val";
+                g.valueField[0].id = g.valueField[0].name = g.id;
             }
             if (g.valueField[0].name == null) g.valueField[0].name = g.valueField[0].id;
             if (p.valueFieldCssClass)
@@ -18195,14 +18210,7 @@
             }
             g.valueField.attr("data-ligerid", g.id);
 
-
-            if ($(this.element).is(":hidden") || $(this.element).is(":text"))
-            {
-                g.radioList = $('<div></div>').insertBefore(this.element);
-            } else
-            {
-                g.radioList = $(this.element);
-            }
+            g.radioList = $(this.element);
             g.radioList.html('<div class="l-radiolist-inner"><table cellpadding="0" cellspacing="0" border="0" class="l-radiolist-table"></table></div>').addClass("l-radiolist").append(g.valueField);
             g.radioList.table = $("table:first", g.radioList);
 
@@ -18395,9 +18403,11 @@
             this.clearContent();
             if (!data) return;
             var out = [], rowSize = p.rowSize, appendRowStart = false, name = p.name || g.id;
+            debugger;
             for (var i = 0; i < data.length; i++)
             {
-                var val = data[i][p.valueField], txt = data[i][p.textField], id = g.id + "-" + i;
+
+                var val = data[i][p.valueField], txt = data[i][p.textField], id = new Date().getTime()+"-"+i+"+"+g.id;
                 var newRow = i % rowSize == 0;
                 //0,5,10
                 if (newRow)
@@ -18415,7 +18425,7 @@
         _getValue: function ()
         {
             var g = this, p = this.options, name = p.name || g.id;
-            return $('input:radio[name="' + name + '"]:checked').val();
+            return $('input:radio[name="' + name + '"]:checked',g.radioList).val();
         },
         getValue: function ()
         {
@@ -18443,7 +18453,6 @@
         //设置值到 隐藏域
         _changeValue: function (newValue)
         {
-
             var g = this, p = this.options, name = p.name || g.id;
             $("input:radio[name='" + name + "']", g.radioList).each(function ()
             {
@@ -19304,6 +19313,13 @@
                         {
                             iframeloading.hide();
                         });
+                    }
+                }else{
+
+                    var url = contentitem.attr("url");
+                    console.log(url,'url')
+                    if(url){
+                        contentitem.load(url);
                     }
                 }
             });

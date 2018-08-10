@@ -556,6 +556,7 @@ background: url(../images/icon/icon-loading.gif) no-repeat; background-position:
 */
 .l-panel-search-box{
     background: #E5EFFE url(../images/layout/panel-header2.gif) repeat-x;
+    border-bottom: 1px solid #99BBE8;
 }
 
 .l-panel-search

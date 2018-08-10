@@ -18,6 +18,36 @@ JUI = {
     },
     menuData:[
         {
+            "text": "demo",
+            "children": [
+                {
+                    "text": "demo",
+                    "children": [
+                        {
+                            "text": "form",
+                            "url": "../demo/form/form.html"
+                        },
+                        {
+                            "text": "grid",
+                            "url": "../demo/grid/grid.html"
+                        },
+                        {
+                            "text": "formgrid",
+                            "url": "../demo/formgrid/formgrid.html"
+                        },
+                        {
+                            "text": "tab",
+                            "url": "../demo/tab/tab.html"
+                        },
+                        {
+                            "text": "tree",
+                            "url": "../demo/tree/tree.html"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "text":"客户管理",
             "children":[
                 {

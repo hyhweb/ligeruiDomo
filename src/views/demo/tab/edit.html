@@ -14,7 +14,7 @@
 </head>
 <body>-->
 <div>
-    <div id="form1"></div>
+    <form id="form2"></form>
 </div>
 <script type="text/javascript">
     var groupicon = "../../../../lib/ligerUI/skins/icons/communication.gif";
@@ -22,7 +22,7 @@
     $(function () {
         console.log($("#edit").data(),'$("#edit").data()')
         //创建表单结构
-        var form = $("#form1").ligerForm({
+        var form = $("#form2").ligerForm({
             inputWidth: 170, labelWidth: 90, space: 40,
             fields: [
                 /* {name: "ProductID", type: "hidden"},*/
@@ -39,10 +39,10 @@
                     }
                 },
                 {
-                    display: "性别", name: "sex1", newline: true,
+                    display: "性别", name: "sex", newline: true,
                     type: "radiolist",
                     editor: {
-                        name: "sex1",
+                        name: "sex",
                         type: "radiolist",
                         textField: 'text',
                         valueField: 'CategoryID',
@@ -51,10 +51,9 @@
                     }
                 },
                 {
-                    display: "checkbox", name: "checkbox1", newline: true,
+                    display: "checkbox", name: "checkbox", newline: true,
                     type: "checkboxlist",
                     editor: {
-                        name: "checkbox1",
                         type: "checkboxlist",
                         textField: 'text',
                         valueField: 'CategoryID',
@@ -77,7 +76,7 @@
 
         function f_save()
         {
-            var form = liger.get("form1");
+            var form = liger.get("form2");
 
             var data = form.getData();
 
@@ -87,6 +86,7 @@
         {
             alert('关闭');
         }
+
 
        // setTimeout(function () {
             form.setData({

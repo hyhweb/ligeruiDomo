@@ -28,6 +28,8 @@ $(function ()
        })
    }
     $("#topmenu").ligerToolBar({ items: [
+        {text: 'demo', click: function (item) {filterMenu(item.text)}},
+        { line:true },
         {text: '客户管理', click: function (item) {filterMenu(item.text)}},
         { line:true },
         { text: '工作单管理', click: function (item) {filterMenu(item.text)}},
@@ -102,7 +104,7 @@ $(function ()
     });
 
     //面板
-    filterMenu('客户管理');
+    filterMenu('demo');
     /*$("#accordion1").ligerAccordion({
         height: height - 24, speed: null,
         onMenuSelect:function (node) {

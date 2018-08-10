@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,10 +13,12 @@
     <script src="../../../source/lib/json2.js" type="text/javascript"></script>
     <script src="../../../source/scripts/api.js" type="text/javascript"></script>
 </head>
-<body>
+<body>-->
+<div>
 <form id="form"></form>
 <div id="grid"></div>
-</body>
+</div>
+<!--</body>-->
 <script type="text/javascript">
     $(function () {
         var grid;
@@ -143,7 +145,7 @@
                 $("#form")[0].reset();
             }
 
-            $("#form").ligerForm();
+           // $("#form").ligerForm();
             // setTimeout(function () {
             form.setData({
                 ProductName: '222',
@@ -167,7 +169,6 @@
         var editDialog = function (rows) {
             /*var rows = grid.getSelectedRows();
             console.log(rows);*/
-
             parentDialog=   $.ligerDialog.open(
                 {
                     height:400,
@@ -228,7 +229,6 @@
                         {
                             text: '修改', click: function (item) {
                             var rows = grid.getSelectedRows();
-                           console.log(rows)
                             editDialog(rows);
                         }, icon: 'edit'
                         },
@@ -250,4 +250,5 @@
 
     })
 </script>
-</html>
+<!--
+</html>-->

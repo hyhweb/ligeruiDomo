@@ -180,6 +180,7 @@
             }
             else if (p.url)
             {
+
                 var url = $.isFunction(p.url) ? p.url.call(g) : p.url;
                 var urlParms = $.isFunction(p.urlParms) ? p.urlParms.call(g) : p.urlParms;
                 if (p.timeParmName)

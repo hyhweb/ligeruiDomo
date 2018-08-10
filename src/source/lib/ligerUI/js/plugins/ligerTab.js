@@ -151,6 +151,13 @@
                             iframeloading.hide();
                         });
                     }
+                }else{
+
+                    var url = contentitem.attr("url");
+                    console.log(url,'url')
+                    if(url){
+                        contentitem.load(url);
+                    }
                 }
             });
             //init 

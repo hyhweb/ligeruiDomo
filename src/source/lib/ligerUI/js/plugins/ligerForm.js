@@ -190,6 +190,7 @@
     //param {jinput} 表单元素jQuery对象 比如input、select、textarea 
     $.ligerDefaults.Form.editorBulider = function (jinput)
     {
+
         //这里this就是form的ligerui对象
         var g = this, p = this.options;
         if (!jinput || !jinput.length) return;
@@ -388,6 +389,7 @@
             var g = this, p = this.options;
             var jform = $(this.element);
             g.form = jform.is("form") ? jform : jform.parents("form:first");
+
             //生成ligerui表单样式
             $("input,select,textarea", jform).each(function ()
             {
@@ -753,7 +755,7 @@
             }
         },
         _createEditors : function(e)
-        { 
+        {
             var g = this, p = this.options;
             var fields = e.fields,
                 idPrev = e.idPrev || g.id,
@@ -1178,6 +1180,7 @@
         },
         _createEditor: function (editorBuilder, container, editParm, width, height)
         {
+
             var g = this, p = this.options;
             try
             {
